@@ -6,7 +6,7 @@
 /*   By: argomez <argomez@student.42angouleme.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 11:08:43 by argomez           #+#    #+#             */
-/*   Updated: 2022/05/26 18:02:39 by argomez          ###   ########.fr       */
+/*   Updated: 2022/05/27 10:22:51 by argomez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,9 @@ static void	ft_count_map_x(t_game *game)
 
 static void	ft_map_parsing(t_game *game)
 {
-	int	len_line;
 	int	y;
-	int	x;
 
 	y = -1;
-	x = -1;
-	len_line = 0;
-	while (game->map->matrix[0][++x])
-		len_line++;
 	while (game->map->matrix[++y])
 		check_map_symbols(game->map->matrix[y], y, game);
 	if (game->map->nb_starts == 0
