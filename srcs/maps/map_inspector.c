@@ -6,7 +6,7 @@
 /*   By: argomez <argomez@student.42angouleme.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 11:08:43 by argomez           #+#    #+#             */
-/*   Updated: 2022/05/27 10:22:51 by argomez          ###   ########.fr       */
+/*   Updated: 2022/05/31 13:05:05 by argomez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ static void	ft_map_parsing(t_game *game)
 		|| game->map->nb_escapes == 0
 		|| game->map->nb_collects == 0)
 		ft_error(19, game);
-	map_save_objects(game->map, game);
 }
 
 static void	ft_define_map(char *file, t_game *game)

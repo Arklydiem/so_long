@@ -6,7 +6,7 @@
 /*   By: argomez <argomez@student.42angouleme.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 16:10:06 by argomez           #+#    #+#             */
-/*   Updated: 2022/05/26 16:41:09 by argomez          ###   ########.fr       */
+/*   Updated: 2022/05/27 14:32:59 by argomez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,23 @@ static void	error_map(int error)
 	ft_printf("Map error : %s.\n", error_map[error % 10]);
 }
 
+static void	error_display(int error)
+{
+	char	*error_display[11];
+
+	error_display[0] = "display failed";
+	error_display[1] = "not yed defined";
+	error_display[2] = "not yed defined";
+	error_display[3] = "not yed defined";
+	error_display[4] = "not yed defined";
+	error_display[5] = "not yed defined";
+	error_display[6] = "not yed defined";
+	error_display[7] = "not yed defined";
+	error_display[8] = "not yed defined";
+	error_display[9] = "not yed defined";
+	ft_printf("Display error : %s.\n", error_display[error % 10]);
+}
+
 void	ft_error(int error, t_game *game)
 {
 	if (error == 0)
@@ -54,5 +71,7 @@ void	ft_error(int error, t_game *game)
 		error_base(error);
 	else if (10 <= error && error <= 19)
 		error_map(error);
+	else if (20 <= error && error <= 29)
+		error_display(error);
 	clear_game(game);
 }
