@@ -6,7 +6,7 @@
 #    By: argomez <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/29 16:56:39 by argomez           #+#    #+#              #
-#    Updated: 2022/06/07 17:45:56 by argomez          ###   ########.fr        #
+#    Updated: 2022/06/22 17:46:57 by argomez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ endef
 
 
 NAME		=	so_long
+NAME_B		=	.so_long
 
 CC			=	gcc
 CFLAGS		=	-g -Wall -Werror -Wextra
@@ -127,13 +128,15 @@ $(NAME): $(LIBFT)  $(OBJ_MANDA)
 	@ $(CC) $(CFLAGS) $(OBJ_MANDA) -Lminilibx-linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz libft/libft.a -o $(NAME)
 	$(display_compilation)
 
-bonus: $(LIBFT)  $(OBJ_BONUS)
+$(NAME_B): $(LIBFT)  $(OBJ_BONUS)
 	@ $(CC) $(CFLAGS) $(OBJ_BONUS) -Lminilibx-linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz libft/libft.a -o $(NAME)
+	@ touch $(NAME_B)
 	$(display_compilation)
 
+bonus:	$(NAME_B)
+
 clean:
-	@ $(RM) $(OBJ_MANDA)
-	@ $(RM) $(OBJ_BONUS)
+	@ $(RM) $(OBJ_MANDA) $(OBJ_BONUS) $(NAME_B)
 	$(display_clean)
 
 fclean:	clearing libftfclean clean

@@ -6,7 +6,7 @@
 /*   By: argomez <argomez@student.42angouleme.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 21:42:27 by argomez           #+#    #+#             */
-/*   Updated: 2022/06/07 15:45:32 by argomez          ###   ########.fr       */
+/*   Updated: 2022/06/22 16:14:39 by argomez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ static void	push_sentinel(t_game *g, t_entity *e, int direction)
 		e->x--;
 	else if (direction == 4 && able_to_move(g, e->y, e->x + 1) == 1)
 		e->x++;
-	else
-		push_sentinel(g, e, ++direction);
 }
 
 void	push_entity(t_game *g, t_entity *e, int key)

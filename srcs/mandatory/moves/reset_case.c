@@ -6,7 +6,7 @@
 /*   By: argomez <argomez@student.42angouleme.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 21:22:42 by argomez           #+#    #+#             */
-/*   Updated: 2022/06/07 18:01:43 by argomez          ###   ########.fr       */
+/*   Updated: 2022/06/22 16:52:54 by argomez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static void	reset_case_player(t_game *g, t_entity *e, char cell)
 	else if (cell == 'C')
 		g->map->matrix[e->y][e->x] = '0';
 	cell = g->map->matrix[e->y][e->x];
-	if (cell == 'E')
-		cell = '0';
 	if (cell == '0')
+		print_tiles(g, e->y + 1, e->x + 1, cell);
+	else if (cell == 'E')
 		print_tiles(g, e->y + 1, e->x + 1, cell);
 }
 
