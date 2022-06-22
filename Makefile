@@ -6,7 +6,7 @@
 #    By: argomez <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/29 16:56:39 by argomez           #+#    #+#              #
-#    Updated: 2022/06/02 17:54:34 by argomez          ###   ########.fr        #
+#    Updated: 2022/06/07 17:45:56 by argomez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,47 +33,79 @@ CC			=	gcc
 CFLAGS		=	-g -Wall -Werror -Wextra
 RM			=	rm -f
 
-SRC			=	main.c				\
-				errors.c			\
-				change_matrix.c
+MADATORY	=	main.c						\
+				change_matrix.c				\
 
-INITS		=	game_init.c			\
-				map_init.c			\
+BONUS		=	main.c						\
+				change_matrix.c				\
 
-MAPS		=	map_inspector.c		\
-				check_map_symbols.c	\
+SRC			=	errors.c					\
 
-IMPORTS		=	import_images.c		\
-				import_chars.c		\
-				import_collects.c	\
-				import_escapes.c	\
-				import_numbers.c	\
-				import_sentinels.c	\
-				import_tiles.c		\
-				import_walls.c		\
+INITS		=	game_init.c					\
+				map_init.c					\
 
-DISPLAYS	=	open_window.c		\
-				print_images.c		\
-				print_images_2.c	\
-				move_player.c		\
-				move_sentinel.c		\
-				move_manipulations.c\
-				print_chars_1.c		\
-				print_chars_2.c		\
-				print_escapes.c		\
-				display_count.c		\
+MAPS		=	map_inspector.c				\
+				check_map_symbols.c			\
 
-CLEARS		=	clear_game.c		\
-				clear_images.c		\
+IMPORTS		=	import_images.c				\
+				import_chars.c				\
+				import_collects.c			\
+				import_escapes.c			\
+				import_numbers.c			\
+				import_sentinels.c			\
+				import_tiles.c				\
+				import_walls.c				\
 
-SRCS		=	$(addprefix srcs/, $(SRC))					\
-				$(addprefix srcs/inits/, $(INITS))			\
-				$(addprefix srcs/maps/, $(MAPS))			\
-				$(addprefix srcs/displays/, $(DISPLAYS))	\
-				$(addprefix srcs/clears/, $(CLEARS))		\
-				$(addprefix srcs/imports/, $(IMPORTS))		\
+DISPLAYS	=	open_window.c				\
+				display_count.c				\
+				put_image_entity.c			\
 
-OBJ			=	$(SRCS:.c=.o)
+MOVES		=	move_entities.c				\
+				able_to_move.c				\
+				apply_case.c				\
+				player_on_sentinel.c		\
+				player_on_escape.c			\
+				push_entity.c				\
+				reset_case.c				\
+
+PRINTS		=	print_collects.c			\
+				print_escapes.c				\
+				print_images.c				\
+				print_images_2.c			\
+				print_players.c				\
+				print_sentinels.c			\
+				print_tiles.c				\
+				print_trees.c				\
+				print_walls.c				\
+	
+CLEARS		=	clear_game.c				\
+				clear_images.c				\
+
+SRCS_MANDA	=	$(addprefix srcs/mandatory/, $(SRC))					\
+				$(addprefix srcs/mandatory/inits/, $(INITS))			\
+				$(addprefix srcs/mandatory/maps/, $(MAPS))				\
+				$(addprefix srcs/mandatory/displays/, $(DISPLAYS))		\
+				$(addprefix srcs/mandatory/clears/, $(CLEARS))			\
+				$(addprefix srcs/mandatory/imports/, $(IMPORTS))		\
+				$(addprefix srcs/mandatory/moves/, $(MOVES))			\
+				$(addprefix srcs/mandatory/prints/, $(PRINTS))			\
+				$(addprefix srcs/mandatory/, $(MADATORY))					\
+
+SRCS_BONUS	=	$(addprefix srcs/bonus/, $(SRC))						\
+				$(addprefix srcs/bonus/inits/, $(INITS))				\
+				$(addprefix srcs/bonus/maps/, $(MAPS))					\
+				$(addprefix srcs/bonus/displays/, $(DISPLAYS))			\
+				$(addprefix srcs/bonus/clears/, $(CLEARS))				\
+				$(addprefix srcs/bonus/imports/, $(IMPORTS))			\
+				$(addprefix srcs/bonus/moves/, $(MOVES))				\
+				$(addprefix srcs/bonus/prints/, $(PRINTS))				\
+				$(addprefix srcs/bonus/, $(BONUS))						\
+
+
+OBJ_MANDA	=	$(SRCS_MANDA:.c=.o)
+
+
+OBJ_BONUS	=	$(SRCS_BONUS:.c=.o)
 
 LIBFT		=	libft/libft.a
 
@@ -91,12 +123,17 @@ libftfclean:
 clearing:
 	@ clear
 
-$(NAME): $(LIBFT)  $(OBJ)
-	@ $(CC) $(CFLAGS) $(OBJ) -Lminilibx-linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz libft/libft.a -o $(NAME)
+$(NAME): $(LIBFT)  $(OBJ_MANDA)
+	@ $(CC) $(CFLAGS) $(OBJ_MANDA) -Lminilibx-linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz libft/libft.a -o $(NAME)
+	$(display_compilation)
+
+bonus: $(LIBFT)  $(OBJ_BONUS)
+	@ $(CC) $(CFLAGS) $(OBJ_BONUS) -Lminilibx-linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz libft/libft.a -o $(NAME)
 	$(display_compilation)
 
 clean:
-	@ $(RM) $(OBJ)
+	@ $(RM) $(OBJ_MANDA)
+	@ $(RM) $(OBJ_BONUS)
 	$(display_clean)
 
 fclean:	clearing libftfclean clean
