@@ -6,7 +6,7 @@
 /*   By: argomez <argomez@student.42angouleme.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 10:25:18 by argomez           #+#    #+#             */
-/*   Updated: 2022/06/22 15:07:39 by argomez          ###   ########.fr       */
+/*   Updated: 2022/06/23 12:52:37 by argomez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ static void	check_first_last_lines(char *line, t_game *game)
 	{
 		if (line[x] != '1' && x < game->map->x)
 		{
+			if (line[x] != '1')
+				ft_error(16, game);
 			if (x != game->map->x)
 				break ;
-			ft_error(16, game);
 		}
 	}
 	if (x != game->map->x)

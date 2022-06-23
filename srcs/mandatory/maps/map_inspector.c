@@ -6,7 +6,7 @@
 /*   By: argomez <argomez@student.42angouleme.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 11:08:43 by argomez           #+#    #+#             */
-/*   Updated: 2022/06/22 15:32:30 by argomez          ###   ########.fr       */
+/*   Updated: 2022/06/23 12:08:34 by argomez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	ft_count_map_y(t_game *game)
 			game->map->y++;
 		}
 	}
-	if (readed == 0 && buff[0] == '1')
+	if (readed == 0 && (buff[0] == '1' || buff[0] == '0'))
 		game->map->y++;
 	if (close(fd) == -1)
 		ft_error(13, game);
@@ -57,9 +57,10 @@ static void	ft_count_map_x(t_game *game)
 			break ;
 		i = -1;
 		game->map->matrix[count] = ft_calloc(ft_strlen(line), sizeof(char) + 1);
-		while (line[++i] != '\n' && line[i])
+		while (line[++i] && line[i] != '\n')
 			game->map->matrix[count][i] = line[i];
-		game->map->x = i;
+		if (game->map->x == 0)
+			game->map->x = i;
 		free(line);
 		count++;
 	}
